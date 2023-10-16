@@ -54,6 +54,14 @@ services:
       FROM_NAME: "John Smith"
       FROM_ADDRESS: john.smith@example.com
 
+  listener-service:
+    build:
+      context: ./../listener-service
+      dockerfile: ./../listener-service/listener-service.dockerfile
+    deploy:
+      mode: replicated
+      replicas: 1
+
   postgres:
     image: "postgres:14.0"
     ports:
@@ -87,7 +95,7 @@ services:
       - "8025:8025"
 
   rabbitmq:
-    image: 'rabbitmq:3.9-alpine'
+    image: "rabbitmq:3.9-alpine"
     ports:
       - "5672:5672"
     deploy:
